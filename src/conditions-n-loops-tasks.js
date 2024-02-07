@@ -21,8 +21,11 @@
  *  0  => true
  *  -5 => false
  */
-function isPositive(/* number */) {
-  throw new Error('Not implemented');
+function isPositive(number) {
+  if (number >= 0) {
+    return true;
+  }
+  return false;
 }
 
 /**
@@ -38,8 +41,17 @@ function isPositive(/* number */) {
  *  -5, 0, 5      => 5
  *  -0.1, 0, 0.2  => 0.2
  */
-function getMaxNumber(/* a, b, c */) {
-  throw new Error('Not implemented');
+function getMaxNumber(a, b, c) {
+  const arr = [a, b, c];
+  let max = arr[0];
+
+  for (let i = 0; i < arr.length; i += 1) {
+    if (arr[i] > max) {
+      max = arr[i];
+    }
+  }
+
+  return max;
 }
 
 /**
@@ -135,8 +147,19 @@ function convertNumberToString(/* numberStr */) {
  *  '0123210'   => true
  *  'qweqwe'    => false
  */
-function isPalindrome(/* str */) {
-  throw new Error('Not implemented');
+function isPalindrome(str) {
+  const arr = [...str];
+  const reverseArr = [];
+
+  for (let i = arr.length - 1; i > -1; i -= 1) {
+    reverseArr[reverseArr.length] = arr[i];
+  }
+
+  if (JSON.stringify(arr) === JSON.stringify(reverseArr)) {
+    return true;
+  }
+
+  return false;
 }
 
 /**
@@ -153,8 +176,15 @@ function isPalindrome(/* str */) {
  *  'qwerty', 'Q'     => -1
  *  'qwerty', 'p'     => -1
  */
-function getIndexOf(/* str, letter */) {
-  throw new Error('Not implemented');
+function getIndexOf(str, letter) {
+  const arr = [...str];
+
+  for (let i = 0; i < arr.length; i += 1) {
+    if (arr[i] === letter) {
+      return i;
+    }
+  }
+  return -1;
 }
 
 /**
@@ -172,8 +202,16 @@ function getIndexOf(/* str, letter */) {
  *  12345, 0    => false
  *  12345, 6    => false
  */
-function isContainNumber(/* num, digit */) {
-  throw new Error('Not implemented');
+function isContainNumber(num, digit) {
+  const str = `${num}`;
+  const arr = [...str];
+
+  for (let i = 0; i < arr.length; i += 1) {
+    if (arr[i] === `${digit}`) {
+      return true;
+    }
+  }
+  return false;
 }
 
 /**

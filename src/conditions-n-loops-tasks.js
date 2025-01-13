@@ -483,8 +483,40 @@ function sortByAsc(/* arr */) {
  *  '012345', 3 => '024135' => '043215' => '031425'
  *  'qwerty', 3 => 'qetwry' => 'qtrewy' => 'qrwtey'
  */
-function shuffleChar(/* str, iterations */) {
-  throw new Error('Not implemented');
+function shuffleChar(str, iterations) {
+  const { length } = str;
+  if (length <= 1 || iterations <= 0) return str;
+
+  function singleShuffle(input) {
+    let even = '';
+    let odd = '';
+    for (let i = 0; i < input.length; i += 1) {
+      if (i % 2 === 0) even += input[i];
+      else odd += input[i];
+    }
+    return even + odd;
+  }
+
+  let result = str;
+  const seenStates = new Map();
+  let cycleStart;
+  let cycleLength;
+
+  for (let i = 0; i < iterations; i += 1) {
+    if (seenStates.has(result)) {
+      cycleStart = seenStates.get(result);
+      cycleLength = i - cycleStart;
+      const remainingIterations = (iterations - cycleStart) % cycleLength;
+      for (let j = 0; j < remainingIterations; j += 1) {
+        result = singleShuffle(result);
+      }
+      return result;
+    }
+    seenStates.set(result, i);
+    result = singleShuffle(result);
+  }
+
+  return result;
 }
 
 /**
